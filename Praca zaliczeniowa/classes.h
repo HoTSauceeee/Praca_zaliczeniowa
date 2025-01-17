@@ -7,13 +7,13 @@
 using namespace std;
 class entity{
     public: const unsigned int id;
-    protected: virtual ~entity();
+    protected: ~entity();
     entity(unsigned int rand):id(rand){};
     virtual bool access()=0;
 };
 struct rgen:entity{
-    rgen() : generator(std::random_device{}()), entity(*this) {}
-    unsigned int operator()(){uniform_int_distribution<> distrib(0, stoi("fff"));
+    rgen() : generator(std::random_device{}()), entity(std::random_device{}()) {}
+    unsigned int operator()(){uniform_int_distribution<> distrib(0, stoi("fff",nullptr,16));
                                                     return distrib(generator);};
     private: mt19937 generator;
     bool access(){return true;};

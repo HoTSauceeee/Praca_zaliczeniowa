@@ -1,7 +1,7 @@
 #include "classes.h"
 using namespace std;
 int main() {
-    rgen* ptr = new rgen();
-    cout<<ptr->id;
+    rgen r;
+    cout << r.id<<endl<<r()<<endl;
         return 0;
     }
