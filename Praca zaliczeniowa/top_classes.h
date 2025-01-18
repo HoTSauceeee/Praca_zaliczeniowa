@@ -1,5 +1,5 @@
-#ifndef CLASSES_H
-#define CLASSES_H
+#ifndef TOP_CLASSES_H
+#define TOP_CLASSES_H
 #include <iostream>
 #include <string>
 //#include <cstddef>
@@ -9,25 +9,28 @@ class entity{
     public: const unsigned int id;
     protected: ~entity();
     entity(unsigned int rand):id(rand){};
-    virtual bool access()=0;
 };
+class interface:protected entity{};
 struct rgen:entity{
-    rgen() : generator(std::random_device{}()), entity(std::random_device{}()) {}
-    unsigned int operator()(){uniform_int_distribution<> distrib(0, stoi("fff",nullptr,16));
+    rgen() : generator(random_device{}()), entity(std::random_device{}()) {}
+    unsigned int operator()(){
+        uniform_int_distribution<> distrib(0, stoi("fff",nullptr,16));
                                                     return distrib(generator);};
     private: mt19937 generator;
     bool access(){return true;};
 };
-class model:protected entity{};
-class interface:protected entity{};
+class model:protected entity{
+    public: model(const unsigned int rand) : entity(rand){};
+    virtual bool access()=0;
+    
+};
 class person:protected entity{
     private: enum legitimation {guest, apprentice, regular, manager};
     public: person(const unsigned int rand) : entity(rand){};
 };
-class zone:protected entity{
-    friend class entity;
+class zone:protected model{
     static zone* objects[];
-    protected: zone(const unsigned int rand, const zone* object) : entity(rand){};
+    protected: zone(const unsigned int rand, const zone* object) : model(rand){};
 };
 class device:zone{
     device(const unsigned int rand) : zone(rand, this){};

@@ -1,7 +1,7 @@
-#include "classes.h"
+#include "top_classes.h"
 using namespace std;
 int main() {
     rgen r;
-    cout << r.id<<endl<<r()<<endl;
+    cout << r.id << endl << r() << endl;
         return 0;
     }
