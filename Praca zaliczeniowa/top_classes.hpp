@@ -52,7 +52,7 @@ class person:protected entity
         else return 0;
     }
 };
-std::map<const unsigned int, const person*> person::people;
+
 
 
 class zone:protected entity
@@ -67,9 +67,6 @@ class zone:protected entity
         
     };
 };
-map<const unsigned int, const zone*> zone::objects;
-map<const unsigned int, const zone*>::iterator zone::it;
-
 
 class device:zone
 {

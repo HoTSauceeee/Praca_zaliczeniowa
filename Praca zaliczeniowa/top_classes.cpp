@@ -1,6 +1,11 @@
 #include "top_classes.hpp"
 
 
+map<const unsigned int, const zone*> zone::objects;
+map<const unsigned int, const zone*>::iterator zone::it;
+std::map<const unsigned int, const person*> person::people;
+
+
 unsigned int rgen::operator()()
 {
     uniform_int_distribution<> distrib(0, 4095);
@@ -37,29 +42,17 @@ person::person(const unsigned int rand) : entity(rand)
         }
     }
     
-    if(!found)
-    { cout<< "legitimation defaulted to ""guest""\n\n"<<flush; legitimation = avail[0]; }
-
-   
+   if(!found)
+    {cout<< "legitimation defaulted to ""guest""\n\n" << flush; legitimation = avail[0]; }
     string name,surname;
-    
     cout<<" Enter name: "; cin>>name;
     cout<<" Enter surname: "; cin>>surname;
-    
-       ofstream File; File.open("people.txt",ios::app);
-
-        if(File.good()) File<<name<<" "<<surname<<endl;
-
-        else cout<<"\n-----Could not save data-----\n";
-
-        File.close();
-    
-    
+    ofstream File; File.open("people.txt",ios::app);
+    if(File.good()) File<<name<<", "<<surname<<", "<< this->id<<endl;
+    else cout<<"\n-----Could not save data-----\n";
+    File.close();
     people.insert({this->id,this});
-    
-    
 }
-
 
 person::~person()
 {
@@ -80,13 +73,14 @@ void menu::maketitle(enum choice c)
         case 1: cout<< title_big;
     }
 }
+
 void menu::menu_display()
 {
     char i;
     enum choice c = big;
     menu::maketitle(c);
     while(true){
-        cout<<"1. Add user\n"<<"2. Add zone\n"<<"3. Change zone\n\n"<<"enter a number from 1 to 3 or 'q' to exit: ";
+        cout<<"1. Add user\n"<</*"2. Add zone\n"<<"3. Change zone\n\n"<<"enter a number from 1 to 3 or 'q' to exit: "*/"enter 1 or q to exit";
         cin>> i;
         switch(i)
         {
