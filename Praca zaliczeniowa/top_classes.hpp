@@ -48,7 +48,7 @@ class person:protected entity
     void display_id() override;
     friend size_t get_count(person &person)                         //funkcja zaprzyjaźniona
     {
-        if (elevation(person)) return people.size();
+        return people.size();
         else return 0;
     }
 };
