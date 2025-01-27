@@ -9,51 +9,56 @@ unsigned int rgen::operator()()
 void rgen::display_id() {cout<<hex<<id<<endl;}
 
 
-void menu::maketitle(enum choice c)
+zone::zone(const unsigned int rand) : entity(rand)
 {
-    switch(c)
-    {
-        case 0: cout<< title_small;
-            break;
-        case 1: cout<< title_big;
-    }
+    //Dodawanie obiektów do mapy static w pętli
 }
-
-
-zone::zone(const unsigned int rand, const zone* object) : model(rand)
+void zone::display_id()
 {
-    
-}
-zone::display_id()
-{
-    for(ptr: objects) cout << ptr->id;
+    for(it = objects.begin(); it != objects.end();it++) cout<<(it->second)->name<<" with id: "<<hex<<it->first<<endl;; //wyświetlanie nazw i id obiektów w strefie
 }
 
 
 person::person(const unsigned int rand) : entity(rand)
 {
     string choice;
+    bool found = false;
     cout<< "Choose legitimation from: ";
-    for(int i=0;i<4;i++) cout<< avail[i]<< ", ";
+    for(int i=0;i<4;i++)
+    { if(i<3) cout<< avail[i]<< ", ";
+    else cout<< avail[i]<<endl;
+    }
     cout<<endl; cin >> choice;
     for(int i=0;i<4;i++)
     {
-        if(choice == avail[i])
-            {
-        legitimation = avail[i]; i = 4;
-            }
-        else
+        if( choice == avail[i] )
         {
-            legitimation = "guest";;
-            cout<< "legitimation defaulted to ""guest""";
+            legitimation = avail[i]; found = true;
         }
     }
+    
+    if(!found)
+    { cout<< "legitimation defaulted to ""guest""\n\n"<<flush; legitimation = avail[0]; }
+
+    
+    string name,surname;
+    
+    cout<<" Enter name: "; cin>>name;
+    cout<<" Enter surname: "; cin>>surname;
+    
+       ofstream File; File.open("people.txt",ios::app);
+
+        if(File.good()) File<<name<<" "<<surname<<endl;
+
+        else cout<<"\n-----Nie udalo sie zapisac danych-----\n";
+
+        File.close();
+    
+    
     people.insert({this->id,this});
+    
+    
 }
-
-
-void model::display_id(){cout<<hex<<id<<endl;};
-
 
 
 person::~person()
@@ -66,22 +71,35 @@ void person::display_id()
 }
 
 
+void menu::maketitle(enum choice c)
+{
+    switch(c)
+    {
+        case 0: cout<< title_small;
+            break;
+        case 1: cout<< title_big;
+    }
+}
 void menu::menu_display()
 {
     char i;
-    cout<<"1. Add user\n"<<"2. Add zone\n"<<"3. Change zone\n\n"<<"enter a number from 1 to 3 or 'q' to exit: ";
-    cin>> i;
-    switch(i)
-    {
-        case '1':
-            person(rgen{}()); break;
-        case '2':
-            zone(rgen{}()); break;
-        case '3':
-            break;
-        case 'q':
-            exit(0);
-        default:
-            cout<<"Wrong character has been entered";
+    enum choice c = big;
+    menu::maketitle(c);
+    while(true){
+        cout<<"1. Add user\n"<<"2. Add zone\n"<<"3. Change zone\n\n"<<"enter a number from 1 to 3 or 'q' to exit: ";
+        cin>> i;
+        switch(i)
+        {
+            case '1':
+                person(rgen{}()); break;
+            case '2':
+                zone(rgen{}()); break;
+            case '3':
+                break;
+            case 'q':
+                exit(0);
+            default:
+                cout<<"Wrong character has been entered";
+        }
     }
 }

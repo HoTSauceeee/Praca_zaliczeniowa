@@ -7,6 +7,8 @@
 #include <iomanip>
 #include <exception>
 #include <map>
+#include <unistd.h>
+#include <fstream>
 using namespace std;
 
 
@@ -29,16 +31,6 @@ class rgen:entity
 };
 
 
-class model:protected entity
-{
-    void display_id() override;
-    protected:
-    public:
-    model(const unsigned int rand) : entity(rand){};
-    virtual ~model() = default;
-    virtual bool access()=0;                                        //klasa abstrakcyjna
-};
-
 
 class person:protected entity
 {
@@ -60,49 +52,40 @@ class person:protected entity
         else return 0;
     }
 };
+std::map<const unsigned int, const person*> person::people;
 
 
-class zone:protected model
+class zone:protected entity
 {
     void display_id() override;
-    static map<const unsigned int id_a, const zone* ptr> objects;;
+    static map<const unsigned int, const zone*> objects;
+    static map<const unsigned int, const zone*>::iterator it;         //iterator po mapie
     public: zone(const unsigned int rand);
+    string name;
     void change_objects()
     {
         
     };
 };
+map<const unsigned int, const zone*> zone::objects;
+map<const unsigned int, const zone*>::iterator zone::it;
 
 
 class device:zone
 {
+public:
     device(const unsigned int rand) : zone(rand){};
 };
 
 
-class relation:model
+class relation:entity
 {
     void display_id() override;
     static relation* relations[];
     pair<const person*, const entity*> definition;
-    public: relation(const unsigned int rand, const person* a, const entity* b) : definition(pair(a,b)), model(rand){}
+    public: relation(const unsigned int rand, const person* a, const entity* b) : definition(pair(a,b)), entity(rand){}
 };
 
-
-/*class interface:protected entity
-{
-    void display_id() override;
-    protected: interface(const unsigned int rand):entity(rand){};
-};
-
-
-class creator:protected interface
-{
-    void display_id() override;
-    string login, password;
-    creator(const unsigned int rand, const string& login, const string& password) : login(login), password(password), interface(rand){};
-};
-*/
 
 class menu{
     static constexpr string_view title_big =
@@ -147,9 +130,7 @@ class menu{
     enum choice{small,big};
 public:
     static enum choice c;
-    void maketitle(enum choice c);
-    void menu_display();
-        
-    }
+    static void maketitle(enum choice c);
+    static void menu_display();
 };
 #endif
