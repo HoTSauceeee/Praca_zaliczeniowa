@@ -1,7 +1,6 @@
-#include "top_classes.h"
-using namespace std;
-int main() {
-    rgen r;
-    cout << r.id << endl << r() << endl;
-        return 0;
-    }
+#include "top_classes.hpp"
+int main()
+{
+    cout<<rgen{}();                 //objekt tymczasowy
+};
+

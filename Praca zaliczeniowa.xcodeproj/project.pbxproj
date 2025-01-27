@@ -6,10 +6,6 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		A91176032D3A736F00D4DCF8 /* top_classes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A91176012D3A736F00D4DCF8 /* top_classes.cpp */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		A9A7811F2CDE1ED3004C6BD7 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -23,7 +19,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		A91176012D3A736F00D4DCF8 /* top_classes.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = top_classes.cpp; sourceTree = "<group>"; };
 		A9A781212CDE1ED3004C6BD7 /* Praca zaliczniowa */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Praca zaliczniowa"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -32,7 +27,7 @@
 			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
 			buildPhase = A9A7811D2CDE1ED3004C6BD7 /* Sources */;
 			membershipExceptions = (
-				top_classes.h,
+				top_classes.hpp,
 			);
 		};
 /* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
@@ -63,7 +58,6 @@
 			isa = PBXGroup;
 			children = (
 				A9A781232CDE1ED3004C6BD7 /* Praca zaliczeniowa */,
-				A91176012D3A736F00D4DCF8 /* top_classes.cpp */,
 				A9A781222CDE1ED3004C6BD7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -139,7 +133,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A91176032D3A736F00D4DCF8 /* top_classes.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
