@@ -40,7 +40,7 @@ person::person(const unsigned int rand) : entity(rand)
     if(!found)
     { cout<< "legitimation defaulted to ""guest""\n\n"<<flush; legitimation = avail[0]; }
 
-    
+   
     string name,surname;
     
     cout<<" Enter name: "; cin>>name;
@@ -50,7 +50,7 @@ person::person(const unsigned int rand) : entity(rand)
 
         if(File.good()) File<<name<<" "<<surname<<endl;
 
-        else cout<<"\n-----Nie udalo sie zapisac danych-----\n";
+        else cout<<"\n-----Could not save data-----\n";
 
         File.close();
     
